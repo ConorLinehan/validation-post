@@ -1,11 +1,8 @@
-export default function(/* server */) {
+export default function(server) {
 
-  /*
-    Seed your development database using your factories.
-    This data will not be loaded in your tests.
+  server.createList('address', 10);
 
-    Make sure to define a factory for each model you want to create.
-  */
-
-  // server.createList('post', 10);
+  // Fake 20 emails for use then print them to console for user
+  let users = server.createList('user', 20);
+  console.log(users.mapBy('email'));
 }
