@@ -1,0 +1,37 @@
+<div class="columns">
+  <div class="column is-half">
+
+    <label class="label">Name</label>
+    <p class="control name">
+      <input class="input" type="text" name="name" value="" placeholder="You're name">
+    </p>
+
+    <label class="label">Email</label>
+    <p class="control email">
+      <input class="input" type="text" name="name" value="">
+    </p>
+
+    <label class="label">Address</label>
+    <p class="control address">
+      <span class="select">
+        {{#x-select value=null as |xs|}}
+          <option selected disabled>Select an address</option>
+          {{#each selectionAddresses as |address|}}
+            {{#xs.option value=address}}
+              {{address.name}}
+            {{/xs.option}}
+          {{/each}}
+        {{/x-select}}
+      </span>
+    </p>
+
+    <label class="label">Favorite Palindrome</label>
+    <p class="control palindrome">
+      <input class="input" type="text" value="">
+    </p>
+
+    <p class="control submit">
+      <button class="button is-primary">Submit</button>
+    </p>
+  </div>
+</div>

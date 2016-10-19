@@ -15,5 +15,10 @@ export default Ember.Route.extend({
 
   deactivate() {
     this.get('currentModel').user.rollbackAttributes();
+  },
+
+  setupController(controller) {
+    this._super(...arguments);
+    controller.set('isChangesetForm', true);
   }
 });
