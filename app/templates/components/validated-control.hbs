@@ -1,0 +1,7 @@
+{{yield showError}}
+
+{{#if showError}}
+  <span class="help is-danger">
+    {{v-get model valuePath 'message'}}
+  </span>
+{{/if}}
