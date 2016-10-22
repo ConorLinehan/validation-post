@@ -2,9 +2,19 @@
   <div class="column is-half">
 
     <label class="label">Name</label>
-    <p class="control name">
-      <input class="input" type="text" name="name" value="" placeholder="You're name">
-    </p>
+    {{#validated-control
+      class="name"
+      model=this
+      valuePath="name" as |isErrored|}}
+      <input
+      class="input {{if isErrored 'is-danger'}}"
+      type="text"
+      name="name"
+      value={{name}}
+      placeholder="You're name"
+      oninput={{action (action (mut name)) value="target.value"}}
+      >
+    {{/validated-control}}
 
     <label class="label">Email</label>
     <p class="control email">

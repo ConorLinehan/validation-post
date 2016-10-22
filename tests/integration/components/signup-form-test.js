@@ -56,13 +56,14 @@ test('it validates name', function(assert) {
     user=user
   }}`);
 
-  assert.notOk(page.name.isError, 'error is not shown intially');
+  page.name.focus();
 
   page.name.fill('John Doe');
-
-  page.notOk(page.name.isError, 'error is not shown on valid name');
+  assert.notOk(page.name.isError, 'error is not shown on valid name');
 
   page.name.fill('');
+  assert.ok(page.name.isError, 'error is shown on empty name');
 
-  page.ok(page.name.isError, 'error is shown on invalid name');
+  page.name.fill('❌');
+  assert.ok(page.name.isError, 'shows error on invalid characters');
 });

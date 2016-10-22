@@ -6,7 +6,8 @@ import {
   isVisible,
   selectable,
   is,
-  clickable
+  clickable,
+  triggerable
 } from 'ember-cli-page-object';
 
 const form = {
@@ -14,6 +15,7 @@ const form = {
     scope: '.name',
     fill: fillable('input'),
     value: value('input'),
+    focus: triggerable('focusin'),
     isError: isVisible('span.is-danger')
   },
 
