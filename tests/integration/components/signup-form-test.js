@@ -3,6 +3,8 @@ import hbs from 'htmlbars-inline-precompile';
 import { form } from 'validation-post/tests/pages/signup';
 import PageObject from 'ember-cli-page-object';
 import Ember from 'ember';
+import { startMirage } from 'validation-post/initializers/ember-cli-mirage';
+import wait from 'ember-test-helpers/wait';
 
 const page = PageObject.create(form);
 
@@ -10,10 +12,12 @@ moduleForComponent('signup-form', 'Integration | Component | signup form', {
   integration: true,
 
   beforeEach() {
+    this.server = startMirage();
     page.setContext(this);
   },
 
   afterEach() {
+    this.server.shutdown();
     page.removeContext();
   }
 });
@@ -107,4 +111,35 @@ test('it validates palindrome', function(assert) {
   assert.ok(page.palindrome.isError, 'shows error');
   page.palindrome.fill('Navan');
   assert.notOk(page.palindrome.isError);
+});
+
+test('it validates email', function(assert) {
+  this.server.create('user', {
+    email: 'inuse@test.com'
+  });
+
+  this.set('user', Ember.Object.create({
+    email: ''
+  }));
+
+  page.render(hbs`{{signup-form
+    user=user
+  }}`);
+
+  page.email.focus();
+
+  page.email.fill('not an email');
+  assert.ok(page.email.isError, 'shows error for invalid email');
+
+  page.email.fill('inuse@test.com');
+  return wait()
+  .then(() =>{
+    assert.ok(page.email.isError, 'shows error for email in use');
+
+    page.email.fill('valid@test.com');
+    return wait()
+    .then(() =>{
+      assert.notOk(page.email.isError, 'doesn\'t show error for valid email');      
+    });
+  });
 });

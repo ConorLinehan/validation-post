@@ -44,6 +44,7 @@ const form = {
 
   email: {
     scope: '.email',
+    focus: triggerable('focusin'),
     fill: fillable('input'),
     value: value('input'),
     isError: isVisible('span.is-danger')

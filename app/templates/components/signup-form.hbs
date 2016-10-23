@@ -47,9 +47,19 @@
     {{/validated-control}}
 
     <label class="label">Email</label>
-    <p class="control email">
-      <input class="input" type="text" name="name" value="">
-    </p>
+    {{#validated-control
+      class="email"
+      model=this
+      valuePath="email" as |isErrored|}}
+    <input
+    class="input {{if isErrored 'is-danger'}}"
+    type="text"
+    name="name"
+    value={{email}}
+    placeholder="A unique Email"
+    oninput={{action (action (mut email)) value="target.value"}}
+    >
+    {{/validated-control}}
 
     <p class="control submit">
       <button class="button is-primary">Submit</button>

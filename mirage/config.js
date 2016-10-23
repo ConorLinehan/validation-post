@@ -26,4 +26,13 @@ export default function() {
 
  this.get('addresses');
  this.post('users');
+ this.get('users', (db, { queryParams }) =>{
+   let email = queryParams.email;
+
+   if (email) {
+     return db.users.where({ email: email});
+   }
+
+   return db.users;
+ });
 }

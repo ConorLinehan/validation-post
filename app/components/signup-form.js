@@ -24,11 +24,13 @@ const Validations = buildValidations({
   }),
   palindrome: validator('palindrome', {
     message: 'Must be a valid palindrome'
-  })
+  }),
+  email: validator('unique-email')
 });
 
 export default Ember.Component.extend(Validations, {
   name: computed.alias('user.name'),
   addresses: computed.alias('user.addresses'),
-  palindrome: computed.alias('user.favoritePalindrome')
+  palindrome: computed.alias('user.favoritePalindrome'),
+  email: computed.alias('user.email')
 });

@@ -8,10 +8,12 @@ const {
 export default Ember.Component.extend({
   tagName: 'p',
   classNames: ['control'],
+  classNameBindings: ['isValidating:is-loading'],
   model: null,
   valuePath: '',
   validation: null,
   showValidations: false,
+  isValidating: computed.readOnly('validation.isValidating'),
 
   showError: computed.and('showValidations', 'validation.isInvalid').readOnly(),
 
