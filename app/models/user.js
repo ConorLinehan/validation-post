@@ -2,12 +2,12 @@ import DS from 'ember-data';
 
 const {
   attr,
-  belongsTo
+  hasMany
 } = DS;
 
 export default DS.Model.extend({
   email: attr('string'),
   name: attr('string'),
-  address: belongsTo('address'),
+  addresses: hasMany('address'),
   favoritePalindrome: attr('string')
 });

@@ -4,11 +4,16 @@ import {
   fillable,
   value,
   isVisible,
-  selectable,
+  collection,
   is,
   clickable,
   triggerable
 } from 'ember-cli-page-object';
+
+import {
+  clickTrigger,
+  nativeMouseUp
+} from 'validation-post/tests/helpers/ember-power-select';
 
 const form = {
   name: {
@@ -19,17 +24,21 @@ const form = {
     isError: isVisible('span.is-danger')
   },
 
+  address: {
+    scope: '.address',
+    value: value('select'),
+    focus: triggerable('focusin'),
+    select(index) {
+      clickTrigger();
+      nativeMouseUp(`.ember-power-select-option:eq(${index})`);
+    },
+    isError: isVisible('span.is-danger')
+  },
+
   email: {
     scope: '.email',
     fill: fillable('input'),
     value: value('input'),
-    isError: isVisible('span.is-danger')
-  },
-
-  address: {
-    scope: '.address',
-    value: value('select'),
-    select: selectable('select'),
     isError: isVisible('span.is-danger')
   },
 

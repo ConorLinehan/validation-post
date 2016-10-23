@@ -18,8 +18,13 @@ const Validations = buildValidations({
       message: 'Name can only contain letters'
     })
   ],
+  address: validator('length', {
+    is: 2,
+    message: 'You can only select 2 addresses'
+  })
 });
 
 export default Ember.Component.extend(Validations, {
-  name: computed.alias('user.name')
+  name: computed.alias('user.name'),
+  addresses: computed.alias('user.addresses')
 });

@@ -67,3 +67,28 @@ test('it validates name', function(assert) {
   page.name.fill('❌');
   assert.ok(page.name.isError, 'shows error on invalid characters');
 });
+
+test('it validates address', function(assert) {
+  this.set('addresses', [
+    Ember.Object.create({ name: 'Cork' }),
+    Ember.Object.create({ name: 'Dublin'}),
+    Ember.Object.create({ name: 'Limerick'})
+  ]);
+
+  this.set('user', Ember.Object.create({
+    addresses: []
+  }));
+
+  page.render(hbs`{{signup-form
+      user=user
+      selectionAddresses=addresses
+  }}`);
+
+  page.address.focus();
+  page.address.select(0);
+  assert.ok(page.address.isError, 'shows error');
+  page.address.select(1);
+  assert.notOk(page.address.isError, 'no error for valid address');
+  page.address.select(2);
+  assert.ok(page.address.isError, 'shows error');
+});
