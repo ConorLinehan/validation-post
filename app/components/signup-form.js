@@ -21,10 +21,14 @@ const Validations = buildValidations({
   address: validator('length', {
     is: 2,
     message: 'You can only select 2 addresses'
+  }),
+  palindrome: validator('palindrome', {
+    message: 'Must be a valid palindrome'
   })
 });
 
 export default Ember.Component.extend(Validations, {
   name: computed.alias('user.name'),
-  addresses: computed.alias('user.addresses')
+  addresses: computed.alias('user.addresses'),
+  palindrome: computed.alias('user.favoritePalindrome')
 });

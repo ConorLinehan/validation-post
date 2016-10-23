@@ -32,9 +32,19 @@
     {{/validated-control}}
 
     <label class="label">Favorite Palindrome</label>
-    <p class="control palindrome">
-      <input class="input" type="text" value="">
-    </p>
+    {{#validated-control
+      class="palindrome"
+      model=this
+      valuePath="palindrome" as |isErrored|}}
+      <input
+      class="input {{if isErrored 'is-danger'}}"
+      type="text"
+      name="name"
+      value={{palindrome}}
+      placeholder="You're favorite palindrome"
+      oninput={{action (action (mut palindrome)) value="target.value"}}
+      >
+    {{/validated-control}}
 
     <label class="label">Email</label>
     <p class="control email">

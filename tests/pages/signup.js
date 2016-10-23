@@ -4,7 +4,6 @@ import {
   fillable,
   value,
   isVisible,
-  collection,
   is,
   clickable,
   triggerable
@@ -35,15 +34,16 @@ const form = {
     isError: isVisible('span.is-danger')
   },
 
-  email: {
-    scope: '.email',
+  palindrome: {
+    focus: triggerable('focusin'),
+    scope: '.palindrome',
     fill: fillable('input'),
     value: value('input'),
     isError: isVisible('span.is-danger')
   },
 
-  palindrome: {
-    scope: '.palindrome',
+  email: {
+    scope: '.email',
     fill: fillable('input'),
     value: value('input'),
     isError: isVisible('span.is-danger')

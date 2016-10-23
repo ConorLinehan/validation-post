@@ -92,3 +92,19 @@ test('it validates address', function(assert) {
   page.address.select(2);
   assert.ok(page.address.isError, 'shows error');
 });
+
+test('it validates palindrome', function(assert) {
+  this.set('user', Ember.Object.create({
+    favoritePalindrome: ''
+  }));
+
+  page.render(hbs`{{signup-form
+    user=user
+  }}`);
+
+  page.palindrome.focus();
+  page.palindrome.fill('Not a palindrome');
+  assert.ok(page.palindrome.isError, 'shows error');
+  page.palindrome.fill('Navan');
+  assert.notOk(page.palindrome.isError);
+});
