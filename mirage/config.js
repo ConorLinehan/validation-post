@@ -1,3 +1,5 @@
+import config from 'validation-post/config/environment';
+
 export default function() {
 
   // These comments are here to help you get started. Feel free to delete them.
@@ -35,4 +37,26 @@ export default function() {
 
    return db.users;
  });
+
+ if (config.environment !== 'test') {
+   this.passthrough('http://www.omdbapi.com/');
+   this.passthrough('https://itunes.apple.com/search');
+   this.passthrough('http://api.tvmaze.com/search/shows');
+   this.passthrough('http://openlibrary.org/**');
+ } else {
+   this.get('http://www.omdbapi.com/', () =>{
+     return {
+       title: 'MyMovie'
+     };
+   });
+   this.get('https://itunes.apple.com/search', () =>{
+     return [];
+   });
+   this.get('http://api.tvmaze.com/search/shows', () =>{
+     return [];
+   });
+   this.get('http://openlibrary.org/**', () =>{
+     return [];
+   });
+ }
 }

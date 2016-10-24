@@ -139,7 +139,29 @@ test('it validates email', function(assert) {
     page.email.fill('valid@test.com');
     return wait()
     .then(() =>{
-      assert.notOk(page.email.isError, 'doesn\'t show error for valid email');      
+      assert.notOk(page.email.isError, 'doesn\'t show error for valid email');
+    });
+  });
+});
+
+test('it validates media', function(assert) {
+  this.set('user', Ember.Object.create({
+    favoriteMedia: ''
+  }));
+
+  page.render(hbs`{{signup-form
+    user=user
+  }}`);
+
+  page.media.focus();
+  page.media.fill('not a show');
+  return wait()
+  .then(() =>{
+    assert.ok(page.media.isError);
+    page.media.fill('MyMovie');
+    return wait()
+    .then(() =>{
+      assert.notOk(page.media.isError);
     });
   });
 });

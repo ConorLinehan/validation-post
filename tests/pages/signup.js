@@ -50,6 +50,13 @@ const form = {
     isError: isVisible('span.is-danger')
   },
 
+  media: {
+    scope: '.favorite-media',
+    focus: triggerable('focusin'),
+    fill: fillable('input'),
+    isError: isVisible('span.is-danger')
+  },
+
   submit: {
     scope: '.submit',
     submit: clickable('button'),

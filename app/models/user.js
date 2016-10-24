@@ -9,5 +9,6 @@ export default DS.Model.extend({
   email: attr('string'),
   name: attr('string'),
   addresses: hasMany('address'),
-  favoritePalindrome: attr('string')
+  favoritePalindrome: attr('string'),
+  favoriteMedia: attr('string')
 });

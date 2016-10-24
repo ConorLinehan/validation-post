@@ -61,6 +61,21 @@
     >
     {{/validated-control}}
 
+    <label class="label">Favorite bit of Media</label>
+    {{#validated-control
+      class="favorite-media"
+      model=this
+      valuePath="media" as |isErrored|}}
+      <input
+      class="input {{if isErrored 'is-danger'}}"
+      type="text"
+      name="name"
+      value={{media}}
+      placeholder="E.g Book, Song, Film"
+      oninput={{action (action (mut media)) value="target.value"}}
+      >
+    {{/validated-control}}
+
     <p class="control submit">
       <button class="button is-primary">Submit</button>
     </p>
