@@ -1,7 +1,13 @@
 {{yield showError}}
-
 {{#if showError}}
-  <span class="help is-danger">
-    {{v-get model valuePath 'messages'}}
-  </span>
+  <i class="fa fa-times"></i>
 {{/if}}
+{{#if showSuccess}}
+  <i class="fa fa-check"></i>
+{{/if}}
+
+<span class="help {{if showError 'is-danger'}}">
+  {{#liquid-bind errorMessage use=shakeAnimation as |message|}}
+    {{message}}
+  {{/liquid-bind}}
+</span>
