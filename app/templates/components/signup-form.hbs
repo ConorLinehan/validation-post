@@ -2,26 +2,19 @@
   <div class="column is-half">
 
     <label class="label">Name</label>
-    {{#validated-control
-      class="name"
-      model=this
-      valuePath="name" as |isErrored|}}
+    <p class="control name">
       <input
-      class="input {{if isErrored 'is-danger'}}"
+      class="input"
       type="text"
       name="name"
       value={{name}}
       placeholder="You're name"
       oninput={{action (action (mut name)) value="target.value"}}
       >
-    {{/validated-control}}
+    </p>
 
     <label class="label">Address</label>
-    {{#validated-control
-      class="address"
-      model=this
-      valuePath="address"
-    }}
+    <p class="control address">
       {{#power-select-multiple
         options=selectionAddresses
         selected=address
@@ -29,52 +22,43 @@
         placeholder="Select two addresses" as |address|}}
         {{address.name}}
       {{/power-select-multiple}}
-    {{/validated-control}}
+    </p>
 
     <label class="label">Favorite Palindrome</label>
-    {{#validated-control
-      class="palindrome"
-      model=this
-      valuePath="palindrome" as |isErrored|}}
+    <p class="control palindrome">
       <input
-      class="input {{if isErrored 'is-danger'}}"
+      class="input"
       type="text"
       name="name"
       value={{palindrome}}
       placeholder="You're favorite palindrome"
       oninput={{action (action (mut palindrome)) value="target.value"}}
       >
-    {{/validated-control}}
+    </p>
 
     <label class="label">Email</label>
-    {{#validated-control
-      class="email"
-      model=this
-      valuePath="email" as |isErrored|}}
-    <input
-    class="input {{if isErrored 'is-danger'}}"
-    type="text"
-    name="name"
-    value={{email}}
-    placeholder="A unique Email"
-    oninput={{action (action (mut email)) value="target.value"}}
-    >
-    {{/validated-control}}
+    <p class="control email">
+      <input
+      class="input"
+      type="text"
+      name="name"
+      value={{email}}
+      placeholder="A unique Email"
+      oninput={{action (action (mut email)) value="target.value"}}
+      >
+    </p>
 
     <label class="label">Favorite bit of Media</label>
-    {{#validated-control
-      class="favorite-media"
-      model=this
-      valuePath="media" as |isErrored|}}
+    <p class="control media">
       <input
-      class="input {{if isErrored 'is-danger'}}"
+      class="input"
       type="text"
       name="name"
       value={{media}}
       placeholder="E.g Book, Song, Film"
       oninput={{action (action (mut media)) value="target.value"}}
       >
-    {{/validated-control}}
+    </p>
 
     <p class="control submit">
       <button class="button is-primary">Submit</button>
