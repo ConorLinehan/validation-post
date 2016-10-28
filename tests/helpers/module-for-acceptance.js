@@ -9,7 +9,6 @@ export default function(name, options = {}) {
   module(name, {
     beforeEach() {
       this.application = startApp();
-
       if (options.beforeEach) {
         return options.beforeEach.apply(this, arguments);
       }
@@ -17,6 +16,7 @@ export default function(name, options = {}) {
 
     afterEach() {
       let afterEach = options.afterEach && options.afterEach.apply(this, arguments);
+      server.shutdown();
       return Promise.resolve(afterEach).then(() => destroyApp(this.application));
     }
   });

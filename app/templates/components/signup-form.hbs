@@ -20,12 +20,12 @@
     {{#validated-control
       class="address"
       model=this
-      valuePath="address"
+      valuePath="addresses"
     }}
       {{#power-select-multiple
         options=selectionAddresses
-        selected=address
-        onchange=(action (mut address))
+        selected=addresses
+        onchange=(action (mut addresses))
         placeholder="Select two addresses" as |address|}}
         {{address.name}}
       {{/power-select-multiple}}
@@ -77,7 +77,7 @@
     {{/validated-control}}
 
     <p class="control submit">
-      <button class="button is-primary">Submit</button>
+      <button {{action save}} class="button is-primary">Submit</button>
     </p>
   </div>
 </div>

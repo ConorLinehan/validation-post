@@ -12,13 +12,4 @@ export default Ember.Route.extend({
       newUser: this.get('store').createRecord('user')
     });
   },
-
-  deactivate() {
-    this.get('currentModel').user.rollbackAttributes();
-  },
-
-  setupController(controller) {
-    this._super(...arguments);
-    controller.set('isChangesetForm', true);
-  }
 });
