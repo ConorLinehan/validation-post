@@ -60,7 +60,7 @@ export default function() {
    } else {
      return new Mirage.Response(400, {}, {errors: ['Invalid User']});
    }
- });
+ }, { timing: 300});
  this.get('users', (db, { queryParams }) =>{
    let email = queryParams.email;
 

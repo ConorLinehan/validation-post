@@ -1,0 +1,9 @@
+{{#liquid-bind state use=stateAnimation as |taskState|}}
+  {{#if isNormal}}
+    ➔
+  {{else if isSuccess}}  
+    ✓
+  {{else if isError}}
+    X
+  {{/if}}
+{{/liquid-bind}}

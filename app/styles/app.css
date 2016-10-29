@@ -1,0 +1,7 @@
+.task-button {
+  width: 67px;
+}
+
+.task-button.disabled {
+  pointer-events: none;
+}
