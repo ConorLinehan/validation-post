@@ -17,8 +17,8 @@
     <p class="control address">
       {{#power-select-multiple
         options=selectionAddresses
-        selected=address
-        onchange=(action (mut address))
+        selected=addresses
+        onchange=(action (mut addresses))
         placeholder="Select two addresses" as |address|}}
         {{address.name}}
       {{/power-select-multiple}}
@@ -49,7 +49,7 @@
     </p>
 
     <label class="label">Favorite bit of Media</label>
-    <p class="control media">
+    <p class="control favorite-media">
       <input
       class="input"
       type="text"
@@ -61,7 +61,7 @@
     </p>
 
     <p class="control submit">
-      <button class="button is-primary">Submit</button>
+      {{task-button action=save}}
     </p>
   </div>
 </div>

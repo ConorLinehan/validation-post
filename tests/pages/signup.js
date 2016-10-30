@@ -4,7 +4,7 @@ import {
   fillable,
   value,
   isVisible,
-  is,
+  hasClass,
   clickable,
   triggerable
 } from 'ember-cli-page-object';
@@ -14,7 +14,7 @@ import {
   nativeMouseUp
 } from 'validation-post/tests/helpers/ember-power-select';
 
-const form = {
+export const form = {
   name: {
     scope: '.name',
     fill: fillable('input'),
@@ -59,13 +59,23 @@ const form = {
 
   submit: {
     scope: '.submit',
-    submit: clickable('button'),
-    isDisabled: is('disabled', 'button')
+    submit: clickable('.button'),
+    isDisabled: hasClass('disabled', '.button'),
+    click: clickable('.button')
+  },
+
+  fill({ name, email, addresses, media, palindrome}) {
+    this.name.fill(name);
+    this.email.fill(email);
+    this.palindrome.fill(palindrome);
+    this.media.fill(media);
+    addresses.forEach(i =>{
+      this.address.select(i);
+    });
   }
 };
 
-export { form };
-
 export default create({
-  visit: visitable('/')
+  visit: visitable('/'),
+  form
 });

@@ -1,4 +1,30 @@
 import config from 'validation-post/config/environment';
+import Ember from 'ember';
+import Mirage from 'ember-cli-mirage';
+
+const {
+  isBlank
+} = Ember;
+
+function isValidUser(user) {
+  try {
+    if (isBlank(user.name)) {
+      return false;
+    }
+
+    if (isBlank(user.email)) {
+      return false;
+    }
+
+    if (user.addresses.length !== 2) {
+      return false;
+    }
+
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
 
 export default function() {
 
@@ -27,7 +53,14 @@ export default function() {
   */
 
  this.get('addresses');
- this.post('users');
+ this.post('users', (db, { requestBody }) =>{
+   let params = JSON.parse(requestBody);
+   if (isValidUser(params.data.attributes)) {
+     return db.users.create(params);
+   } else {
+     return new Mirage.Response(400, {}, {errors: ['Invalid User']});
+   }
+ }, { timing: 300});
  this.get('users', (db, { queryParams }) =>{
    let email = queryParams.email;
 
