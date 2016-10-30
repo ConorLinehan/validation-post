@@ -33,7 +33,6 @@ test('it can signup user', function(assert) {
 });
 
 test('it prevents invalid request', function(assert) {
-  assert.expect(0);
   server.createList('address', 20);
 
   page.visit();
@@ -47,5 +46,9 @@ test('it prevents invalid request', function(assert) {
     });
 
     page.form.submit.click();
+    andThen(() =>{
+      let postRequests = server.pretender.handledRequests.filter(m => m.method === 'POST');
+      assert.equal(postRequests.length, 0, 'doesn\'t make post request');
+    });
   });
 });
